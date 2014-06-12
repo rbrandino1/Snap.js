@@ -434,14 +434,17 @@
                             if ((cache.simpleStates.halfway || cache.simpleStates.hyperExtending || cache.simpleStates.flick)) {
                                 if (cache.simpleStates.flick && cache.simpleStates.towards === 'left') { // Flicking Closed
                                     action.translate.easeTo(0);
+                                    utils.dispatchEvent('close');
                                 } else if (
                                     (cache.simpleStates.flick && cache.simpleStates.towards === 'right') || // Flicking Open OR
                                     (cache.simpleStates.halfway || cache.simpleStates.hyperExtending) // At least halfway open OR hyperextending
                                 ) {
                                     action.translate.easeTo(settings.maxPosition); // Open Left
+                                    utils.dispatchEvent('open');
                                 }
                             } else {
                                 action.translate.easeTo(0); // Close Left
+                                utils.dispatchEvent('close');
                             }
                             // Revealing Right
                         } else if (cache.simpleStates.opening === 'right') {
@@ -449,14 +452,17 @@
                             if ((cache.simpleStates.halfway || cache.simpleStates.hyperExtending || cache.simpleStates.flick)) {
                                 if (cache.simpleStates.flick && cache.simpleStates.towards === 'right') { // Flicking Closed
                                     action.translate.easeTo(0);
+                                    utils.dispatchEvent('close');
                                 } else if (
                                     (cache.simpleStates.flick && cache.simpleStates.towards === 'left') || // Flicking Open OR
                                     (cache.simpleStates.halfway || cache.simpleStates.hyperExtending) // At least halfway open OR hyperextending
                                 ) {
                                     action.translate.easeTo(settings.minPosition); // Open Right
+                                    utils.dispatchEvent('open');
                                 }
                             } else {
                                 action.translate.easeTo(0); // Close Right
+                                utils.dispatchEvent('close');
                             }
                         }
                         cache.isDragging = false;
